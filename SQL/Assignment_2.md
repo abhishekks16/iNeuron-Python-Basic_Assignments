@@ -44,3 +44,88 @@ select * from city where countrycode = 'JPN';
 ```sql
 select a.name from city a where a.countrycode = 'JPN';
 ```
+
+#### Q7. Query a list of CITY and STATE from the STATION table.
+```sql
+select a.city, a.state from station a;
+```
+
+#### Q8. Query a list of CITY names from STATION for cities that have an even ID number. Print the results in any order, but exclude duplicates from the answer.
+```sql
+select distinct(a.city)
+from station a
+where (a.id % 2 = 0);
+```
+
+#### Q9. Find the difference between the total number of CITY entries in the table and the number of distinct CITY entries in the table.
+```sql
+select count(a.city) as total_entries,
+    count(distinct(a.city)) as distinct_entries,
+    (count(a.city) - count(distinct(a.city))) as difference
+from station a;
+```
+
+#### Q10. Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+```sql
+select a.city, length(a.city) as name_length
+from station a
+order by name_length , a.city 
+limit 1;
+
+select a.city, length(a.city) as name_length
+from station a
+order by name_length desc , a.city 
+limit 1;
+```
+
+#### Q11. Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
+```sql
+select distinct(a.city)
+from station a
+where (a.city like 'a%' or a.city like 'e%' or a.city like 'i%' or a.city like 'o%' or a.city like 'u%')
+or (a.city like 'A%' or a.city like 'E%' or a.city like 'I%' or a.city like 'O%' or a.city like 'U%');
+```
+
+#### Q12. Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
+```sql
+select distinct(a.city)
+from station a
+where (a.city like '%a' or a.city like '%e' or a.city like '%i' or a.city like '%o' or a.city like '%u')
+or (a.city like '%A' or a.city like '%E' or a.city like '%I' or a.city like '%O' or a.city like '%U');
+```
+
+#### Q13. Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+```sql
+select distinct(a.city)
+from station a
+where (a.city not like 'a%' and a.city not like 'e%' and a.city not like 'i%' and a.city not like 'o%' and a.city not like 'u%')
+or (a.city not like 'A%' and a.city not like 'E%' and a.city not like 'I%' and a.city not like 'O%' and a.city not like 'U%');
+```
+
+#### Q14. Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
+```sql
+select distinct(a.city)
+from station a
+where (a.city not like '%a' and a.city not like '%e' and a.city not like '%i' and a.city not like '%o' and a.city not like '%u')
+or (a.city not like '%A' and a.city not like '%E' and a.city not like '%I' and a.city not like '%O' and a.city not like '%U');
+```
+
+#### Q15. Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
+```sql
+select distinct(a.city)
+from station a
+where ((a.city not like 'a%' and a.city not like 'e%' and a.city not like 'i%' and a.city not like 'o%' and a.city not like 'u%')
+and (a.city not like 'A%' and a.city not like 'E%' and a.city not like 'I%' and a.city not like 'O%' and a.city not like 'U%')
+and (a.city not like '%a' and a.city not like '%e' and a.city not like '%i' and a.city not like '%o' and a.city not like '%u')
+and (a.city not like '%A' and a.city not like '%E' and a.city not like '%I' and a.city not like '%O' and a.city not like '%U'));
+```
+
+#### Q16. Query the list of CITY names from STATION that do not start with vowels and do not end with vowels. Your result cannot contain duplicates.
+```sql
+select distinct(a.city)
+from station a
+where ((a.city not like 'a%' and a.city not like 'e%' and a.city not like 'i%' and a.city not like 'o%' and a.city not like 'u%')
+and (a.city not like 'A%' and a.city not like 'E%' and a.city not like 'I%' and a.city not like 'O%' and a.city not like 'U%')
+and (a.city not like '%a' and a.city not like '%e' and a.city not like '%i' and a.city not like '%o' and a.city not like '%u')
+and (a.city not like '%A' and a.city not like '%E' and a.city not like '%I' and a.city not like '%O' and a.city not like '%U'));
+```

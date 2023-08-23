@@ -163,4 +163,16 @@ VALUES
     (1, 2, 2, '2019-02-17', 1, 800),
     (2, 2, 3, '2019-06-02', 1, 800),
     (3, 3, 4, '2019-05-13', 2, 2800);
-``` 
+```
+> Question : Write an SQL query that reports the products that were only sold in the first quarter of 2019. That is,
+between 2019-01-01 and 2019-03-31 inclusive.
+```sql
+SELECT p.product_id, p.product_name
+FROM Product p
+LEFT JOIN Sales s ON p.product_id = s.product_id
+WHERE p.product_id NOT IN (
+    SELECT DISTINCT s.product_id
+    FROM Sales s
+    WHERE s.sale_date NOT BETWEEN '2019-01-01' AND '2019-03-31'
+)
+```

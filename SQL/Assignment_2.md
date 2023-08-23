@@ -129,3 +129,21 @@ and (a.city not like 'A%' and a.city not like 'E%' and a.city not like 'I%' and 
 and (a.city not like '%a' and a.city not like '%e' and a.city not like '%i' and a.city not like '%o' and a.city not like '%u')
 and (a.city not like '%A' and a.city not like '%E' and a.city not like '%I' and a.city not like '%O' and a.city not like '%U'));
 ```
+#### Q17.
+```sql
+create table Product (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(255),
+    unit_price INT
+);
+
+create table Sales (
+    seller_id INT,
+    product_id INT,
+    buyer_id INT,
+    sale_date DATE,
+    quantity INT,
+    price INT,
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+);
+```

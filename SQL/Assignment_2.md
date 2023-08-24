@@ -216,3 +216,24 @@ JOIN (
     GROUP BY team_id
 ) t ON e.team_id = t.team_id;
 ```
+#### Q22 : Write an SQL query to find the type of weather in each country for November 2019.
+```
+The type of weather is:
+● Cold if the average weather_state is less than or equal 15,
+● Hot if the average weather_state is greater than or equal to 25, and
+● Warm otherwise.
+```
+```sql
+select c.country_name,
+        (case when avg(w.weather_state)<=15 then 'Cold' 
+        when avg(w.weather_state)>=25 then 'Hot' 
+        else 'Warm' end) weather_type
+from
+Countries c
+inner join 
+Weather w
+on c.country_id = w.country_id
+where YEAR(day) = 2019 and MONTH(day) = 11
+group by c.country_name
+order by weather_type;
+```

@@ -190,3 +190,29 @@ order by a.author_id asc;
 SELECT ROUND((COUNT(CASE WHEN order_date = customer_pref_delivery_date THEN 1 END) / COUNT(*)) * 100, 2) AS immediate_percentage
 FROM Delivery;
 ```
+#### Q20 : Write an SQL query to find the ctr of each Ad. Round ctr to two decimal points.
+```sql
+SELECT
+    ad_id,
+    ROUND(
+        SUM(CASE WHEN action = 'Clicked' THEN 1 ELSE 0 END) /
+        (SUM(CASE WHEN action = 'Clicked' THEN 1 ELSE 0 END) + SUM(CASE WHEN action = 'Viewed' THEN 1 ELSE 0 END) )* 100,
+        2
+    ) AS click_through_rate
+FROM Ads
+GROUP BY ad_id
+order by ad_id;
+```
+
+#### Q21 : Write an SQL query to find the team size of each of the employees.
+```sql
+SELECT
+    e.employee_id,
+    t.team_size
+FROM Employee e
+JOIN (
+    SELECT team_id, COUNT(team_id) AS team_size
+    FROM Employee
+    GROUP BY team_id
+) t ON e.team_id = t.team_id;
+```

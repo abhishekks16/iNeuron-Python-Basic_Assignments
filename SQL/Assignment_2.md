@@ -176,3 +176,17 @@ WHERE p.product_id NOT IN (
     WHERE s.sale_date NOT BETWEEN '2019-01-01' AND '2019-03-31'
 )
 ```
+
+#### Q18. :  Write an SQL query to find all the authors that viewed at least one of their own articles. Return the result table sorted by id in ascending order.
+```sql
+select distinct a.author_id
+from Views a
+where a.author_id = a.viewer_id
+order by a.author_id asc;
+```
+
+#### Q19. Write an SQL query to find the percentage of immediate orders in the table, rounded to 2 decimal places.
+```sql
+SELECT ROUND((COUNT(CASE WHEN order_date = customer_pref_delivery_date THEN 1 END) / COUNT(*)) * 100, 2) AS immediate_percentage
+FROM Delivery;
+```
